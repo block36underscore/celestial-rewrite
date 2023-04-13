@@ -4,13 +4,17 @@ package fishcute.celestial.expressions
 
 import kotlin.math.pow
 
+val ONE = Expression.Const(1.0)
+val ZERO = Expression.Const(0.0)
+val NEGATIVE_ONE = Expression.Const(-1.0)
+
 fun interface Expression: ()->Double {
 
     class Const(val constant: Double) : Expression {
         override fun invoke() = constant
         override fun toString() = this.constant.toString()
     }
-
+    
     open class Var(val id: String, context: ExpressionContext) : Expression {
         val supplier = context.getVariable(id)
         override fun invoke() = supplier()

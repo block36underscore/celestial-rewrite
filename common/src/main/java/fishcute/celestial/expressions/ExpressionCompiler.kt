@@ -1,7 +1,5 @@
 package fishcute.celestial.expressions
 
-import celestialexpressions.*
-
 @Throws(ParsingError::class)
 fun compile(source: String, context: ExpressionContext): Expression =
     assembleExpression(

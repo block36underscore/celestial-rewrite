@@ -31,5 +31,5 @@ repositories {
     mavenCentral()
 }
 kotlin {
-    jvmToolchain(11)
+    jvmToolchain(17)
 }
