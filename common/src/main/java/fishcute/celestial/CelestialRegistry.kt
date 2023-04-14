@@ -1,6 +1,5 @@
 package fishcute.celestial
 
-import fishcute.celestial.obj.CelestialObject
 import net.minecraft.client.Minecraft
 import net.minecraft.resources.ResourceLocation
 

@@ -1,16 +1,19 @@
 package fishcute.celestial.expressions
 
+import fishcute.celestial.CELESTIAL_MODULE
+
 lateinit var registrar: ExpressionRegistrar
 
 class ExpressionRegistrar {
     var modules: HashMap<String, Module> = HashMap()
     init {
         registrar = this
-        this.modules.put("std", STANDARD_MODULE)
+        this.modules["std"] = STANDARD_MODULE
+        this.modules["celestial"] = CELESTIAL_MODULE
     }
 
     fun registerModule(name: String, module: Module) {
-        if (name == "std" || name == "local") throw RegistrationError("Name of module can not be $name, as that name is reserved internally")
+        if (name == "std" || name == "local" || name == "celestial") throw RegistrationError("Name of module can not be $name, as that name is reserved internally")
         if (modules.containsKey(name)) throw RegistrationError("fishcute.celestial.expressions.Module named $name is already registered")
         this.modules.putIfAbsent(name, module)
     }

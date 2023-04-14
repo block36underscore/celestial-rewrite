@@ -1,5 +1,6 @@
 package fishcute.celestial.expressions
 
+import fishcute.celestial.CELESTIAL_MODULE
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -24,7 +25,8 @@ val STANDARD_MODULE: Module = Module("std",
         "localMinuteOfHour" to {LocalDateTime.now().minute.toDouble()},
         "localSecondOfDay" to {(((LocalDate.now().atTime(LocalTime.now()).getHour() * 60) + LocalDate.now().atTime(LocalTime.now()).getMinute() * 60) + LocalDate.now().atTime(LocalTime.now()).getSecond()).toDouble()},
         "localMinuteOfDay" to {((LocalDate.now().atTime(LocalTime.now()).getHour() * 60) + LocalDate.now().atTime(LocalTime.now()).getMinute()).toDouble()},
-        "localHour" to {LocalTime.now().hour.toDouble()}
+        "localHour" to {LocalTime.now().hour.toDouble()},
+        "random" to {Math.random()},
 
         )),
     FunctionList(hashMapOf(
@@ -55,6 +57,7 @@ val STANDARD_MODULE: Module = Module("std",
 data class ExpressionContext(val modules: ArrayList<Module> = ArrayList()) {
     init {
         modules.add(0, STANDARD_MODULE)
+        modules.add(1, CELESTIAL_MODULE)
     }
 
     fun addModule(module: Module) = modules.add(module)
@@ -127,6 +130,12 @@ open class Module(
         if (split.size > 2) throw NoSuchFunctionException("fishcute.celestial.expressions.Function name $name is illegal, cannot have more than one colon")
         return if (split[0] == this.name || split.size == 1) this.functions.hasFunction(split.last())
         else false
+    }
+
+    fun printVars() {
+        this.variables.variables.keys.forEach{
+            println(it)
+        }
     }
 }
 class ModuleBuilder(val name: String) {

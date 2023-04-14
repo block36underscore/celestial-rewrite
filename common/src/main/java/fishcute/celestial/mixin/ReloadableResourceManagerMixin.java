@@ -20,6 +20,6 @@ public class ReloadableResourceManagerMixin {
 
     @Inject(method = "createReload", at = @At("RETURN"))
     private void reload(Executor executor, Executor executor2, CompletableFuture<Unit> completableFuture, List<PackResources> list, CallbackInfoReturnable<ReloadInstance> cir) {
-        Loader.reload();
+        Loader.reloadCelestial();
     }
 }

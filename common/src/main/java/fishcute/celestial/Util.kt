@@ -16,7 +16,7 @@ import java.io.InputStreamReader
 
 
 val reader: Gson = Gson()
-fun getFile(path: String?): JsonObject? {
+fun getFile(path: String): JsonObject? {
     return try {
         val inputStream = Minecraft.getInstance().resourceManager.getResource(ResourceLocation(path)).get().open()
         val bufferedReader = BufferedReader(InputStreamReader(inputStream))
@@ -28,6 +28,7 @@ fun getFile(path: String?): JsonObject? {
     }
 }
 
+fun fileExists(path: String) = Minecraft.getInstance().resourceManager.getResource(ResourceLocation(path)).isPresent
 
 class VertexPoint(var pointX: String, var pointY: String, var pointZ: String, uvX: String?, uvY: String?) {
     var uvX: String? = null

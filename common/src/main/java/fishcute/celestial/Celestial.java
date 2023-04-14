@@ -6,6 +6,8 @@ import dev.architectury.registry.client.keymappings.KeyMappingRegistry;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
 
+import fishcute.celestial.CelestialModuleKt;
+
 public class Celestial {
     public static KeyMapping reloadSky = new KeyMapping("key.reload_sky",
             InputConstants.KEY_F10,
@@ -23,6 +25,7 @@ public class Celestial {
             }
         });
 
+        CelestialModuleKt.getCELESTIAL_MODULE().printVars();
 
     }
 }

@@ -15,6 +15,8 @@ import java.awt.Color
 
 
 class ColorEntry {
+
+    constructor(): this(null, "#ffffff", 1, false, ONE, ONE, ONE)
     constructor(
         colors: ArrayList<MutablePair<Color, Expression>>?,
         baseColor: String,
@@ -105,10 +107,10 @@ class ColorEntry {
         fun createColorEntry(
             o: JsonObject?,
             elementName: String,
-            defaultEntry: ColorEntry?,
+            defaultEntry: ColorEntry,
             optionalSkyEffects: Boolean
         ): ColorEntry {
-            if (o == null) return defaultEntry!! //TODO: Make this properly null safe
+            if (o == null) return defaultEntry //TODO: Make this properly null safe
             try {
                 o.get(elementName).getAsJsonObject().getAsJsonArray(elementName)
             } catch (e: Exception) {
@@ -124,7 +126,7 @@ class ColorEntry {
                         ONE
                     ) else ColorEntry(decodeColor(color))
                 }
-                return defaultEntry!!
+                return defaultEntry
             }
             val colorObject: JsonObject = o.get(elementName).getAsJsonObject()
             val colors = ArrayList<MutablePair<Color, Expression>>()

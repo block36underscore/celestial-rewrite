@@ -9,18 +9,20 @@ var errors = 0
 
 var errorList = ArrayList<String>()
 
+var hasShownWarning = false
+
 fun sendErrorInGame(i: String, unloadResources: Boolean) {
     errors++
     if (Minecraft.getInstance().player == null) return
     if (errorList.contains(i) || errorList.size > 25) return
     errorList.add(i)
-    sendMessage(ChatFormatting.RED.toString() + "[Celestial] " + i, false)
+    sendMessage( "${ChatFormatting.RED}[Celestial] $i", false)
     if (errorList.size >= 25) sendMessage(
-        ChatFormatting.RED.toString() + "[Celestial] Passing 25 error messages. Muting error messages.",
+        "${ChatFormatting.RED}[Celestial] Passing 25 error messages. Muting error messages.",
         false
     )
     if (unloadResources) {
-        sendMessage(ChatFormatting.RED.toString() + "[Celestial] Unloading Celestial resources.", false)
+        sendMessage( "${ChatFormatting.RED}[Celestial] Unloading Celestial resources.", false)
     }
 }
 
@@ -28,7 +30,7 @@ fun sendWarnInGame(i: String) {
     if (Minecraft.getInstance().player == null) return
     if (errorList.contains(i)) return
     errorList.add(i)
-    sendMessage(ChatFormatting.YELLOW.toString() + "[Celestial] " + i, false)
+    sendMessage("${ChatFormatting.YELLOW}[Celestial] $i", false)
 }
 
 fun warn(i: Any) {

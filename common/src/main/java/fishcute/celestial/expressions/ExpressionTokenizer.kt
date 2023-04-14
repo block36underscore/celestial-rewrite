@@ -5,21 +5,22 @@ package fishcute.celestial.expressions
 import java.util.regex.Pattern
 
 @Throws(ParsingError::class)
-fun splitTokens(input: String): ArrayList<BasicToken> {
+fun splitTokens(source: String): ArrayList<BasicToken> {
+    val input = source.replace("\\p{Zs}+".toRegex(), "")
     val out = ArrayList<BasicToken>()
-    if (input.length == 0) return out
+    if (input.isEmpty()) return out
     var currentTokenType: BasicTokenType? = null
     var tokenStart = 0
 
     //Keep track of special characters that may only be used a certain number of times in a token
     var dots = 0
-    for (i in 0 until input.length) {
+    for (i in input.indices) {
         val c = "" + input[i]
 
         // Ignore Whitespace and '#' symbol (for legacy reasons, may be changed in the future)
         if (Pattern.matches("[\\s#]", c)) continue
         // Detect splitters
-        if (c.equals(",")) {
+        if (c == ",") {
             addToken(out, input, tokenStart, i, currentTokenType)
             currentTokenType = BasicTokenType.OPERATOR
             tokenStart = i
@@ -99,7 +100,7 @@ fun identifyTokens(input: ArrayList<BasicToken>): ArrayList<Token> {
                             ',' -> TokenType.SPLITTER
                             else -> {
                                 if (iter.next().text == "(") TokenType.GROUPING_START
-                                else throw ParsingError("This exception should theoretically never happen. Congratulations")
+                                else continue//throw ParsingError("This exception should theoretically never happen. Congratulations")
                             }
                         }
                     }

@@ -33,19 +33,25 @@ class BasicObject(
 
 }
 
-fun createSkyObjectFromJson(o: JsonObject) : BasicObject? {
+fun createSkyObjectFromJson(o: JsonObject) : BasicObject {
 
     val type = findObjectType(o)
 
     //if (type == CelestialObjectType.SKYBOX) return CelestialObject.createSkyBoxObjectFromJson(o, name, dimension)
 
-    val display = o.getAsJsonObject("display")
-    val rotation = o.getAsJsonObject("rotation")
+    var display = o.getAsJsonObject("display")
+    if (display == null) display = JsonObject()
+    var rotation = o.getAsJsonObject("rotation")
+    if (rotation == null) rotation = JsonObject()
+
+    var propertiesJson: JsonObject? = o.getAsJsonObject("properties")
+
+    if (propertiesJson == null) propertiesJson = JsonObject()
+
     //I love parameters
-    val ctx = ExpressionContext()
 
     val cobject = BasicObject(
-        ResourceLocation("minecraft", o.getOptional( "texture", "")),
+        ResourceLocation(o.getOptional( "texture", "")),
         type,
         display.getOptional( "scale", ZERO),
         display.getOptional( "pos_x", ZERO),
@@ -58,8 +64,8 @@ fun createSkyObjectFromJson(o: JsonObject) : BasicObject? {
         rotation.getOptional( "base_degrees_x", Expression.Const(-90.0)),
         rotation.getOptional( "base_degrees_y", ZERO),
         rotation.getOptional( "base_degrees_z", Expression.Const(90.0)),
-        ColorEntry.createColorEntry(o, "solid_color", null, false),
-        createBasicObjectPropertiesFromJson(o.getAsJsonObject("properties")),
+        ColorEntry.createColorEntry(o, "solid_color", ColorEntry(), false),
+        createBasicObjectPropertiesFromJson(propertiesJson),
 //        o.getOptional( "parent", null),
 //        dimension,
         convertToPointUvList(o, "vertex"),
