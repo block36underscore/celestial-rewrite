@@ -1,11 +1,9 @@
+package fishcute.celestial
+
 import com.google.gson.JsonObject
-import fishcute.celestial.doesDimensionHaveCustomSky
 import fishcute.celestial.expressions.Expression
 import fishcute.celestial.expressions.ONE
 import fishcute.celestial.expressions.ZERO
-import fishcute.celestial.forceUpdateVariables
-import fishcute.celestial.getOptional
-import fishcute.celestial.sendErrorInGame
 import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
 import net.minecraft.util.CubicSampler
@@ -158,8 +156,8 @@ class ColorEntry {
     }
 }
 
-var getRealSkyColor = false
-var getRealFogColor = false
+var shouldGetRealSkyColor = false
+var shouldGetRealFogColor = false
 fun decodeColor(hex: String): Color {
     return try {
         when (hex) {

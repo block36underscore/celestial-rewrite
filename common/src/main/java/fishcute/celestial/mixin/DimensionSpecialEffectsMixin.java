@@ -19,7 +19,7 @@ public class DimensionSpecialEffectsMixin {
     private void getCloudsHeight(CallbackInfoReturnable<Float> info) {
         if (Minecraft.getInstance().level != null &&
                 CelestialSky.doesDimensionHaveCustomSky())
-            info.setReturnValue(CelestialSky.getDimensionEnvironmentRenderInfo().getCloudHeight().invoke().floatValue());
+            info.setReturnValue((float) CelestialSky.getDimensionEnvironmentRenderInfo().getCloudHeight().invoke());
     }
     @Inject(method = "getSunriseColor", at = @At("RETURN"), cancellable = true)
     private void getFogColorOverride(float skyAngle, float tickDelta, CallbackInfoReturnable<float[]> info) {
@@ -38,7 +38,7 @@ public class DimensionSpecialEffectsMixin {
                 this.rgba[1] = i * i * 0.7F + (CelestialSky.getDimensionEnvironmentRenderInfo().getTwilightColor().getStoredColor().getGreen() / 255.0F);
                 this.rgba[2] = i * i * 0.0F + (CelestialSky.getDimensionEnvironmentRenderInfo().getTwilightColor().getStoredColor().getBlue() / 255.0F);
 
-                this.rgba[3] = Math.min(j, CelestialSky.getDimensionEnvironmentRenderInfo().getTwilightAlpha().invoke().floatValue());
+                this.rgba[3] = Math.min(j, (float) CelestialSky.getDimensionEnvironmentRenderInfo().getTwilightAlpha().invoke());
                 info.setReturnValue(this.rgba);
             } else {
                 info.setReturnValue(null);

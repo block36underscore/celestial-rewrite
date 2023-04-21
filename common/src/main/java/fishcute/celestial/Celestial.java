@@ -6,24 +6,32 @@ import dev.architectury.registry.client.keymappings.KeyMappingRegistry;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
 
-import fishcute.celestial.CelestialModuleKt;
-
 public class Celestial {
-    public static KeyMapping reloadSky = new KeyMapping("key.reload_sky",
+    public static final KeyMapping RELOAD_SKY = new KeyMapping("key.reload_sky",
             InputConstants.KEY_F10,
+            "key.categories.misc");
+
+    public static final KeyMapping DEBUG_INFO = new KeyMapping("key.debug_sky",
+            InputConstants.KEY_F9,
             "key.categories.misc");
 
     public static final String MOD_ID = "celestial";
 
     public static void init() {
 
-        KeyMappingRegistry.register(reloadSky);
+        KeyMappingRegistry.register(RELOAD_SKY);
+        KeyMappingRegistry.register(DEBUG_INFO);
 
         ClientTickEvent.CLIENT_POST.register(minecraft -> {
-            while (reloadSky.consumeClick()) {
+            while (RELOAD_SKY.consumeClick()) {
                 if (minecraft.player != null) minecraft.player.displayClientMessage(Component.literal("click"), true);
             }
+            while (DEBUG_INFO.consumeClick()) {
+                Util.sendMessage(Util.debugInfo(), false);
+            }
         });
+
+
 
         CelestialModuleKt.getCELESTIAL_MODULE().printVars();
 

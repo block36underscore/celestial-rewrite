@@ -1,8 +1,6 @@
 package fishcute.celestial
 
-import ColorEntry
 import com.google.gson.JsonObject
-import decodeColor
 import fishcute.celestial.expressions.Expression
 import fishcute.celestial.expressions.NEGATIVE_ONE
 import fishcute.celestial.expressions.ONE

@@ -2,9 +2,7 @@
 
 package fishcute.celestial
 
-import fishcute.celestial.Celestial.reloadSky
-import getFogColor
-import getSkyColor
+import fishcute.celestial.Celestial.RELOAD_SKY
 import net.minecraft.ChatFormatting
 
 import net.minecraft.client.Minecraft
@@ -23,10 +21,10 @@ fun worldTick() {
     updateStars()
     //updateVariableValues() //Probably not needed
     if (doesDimensionHaveCustomSky()) {
-        getDimensionRenderInfo()!!.environment.skyColor.setInheritColor(getSkyColor())
-        getDimensionRenderInfo()!!.environment.fogColor.setInheritColor(getFogColor())
+        getDimensionRenderInfo().environment.skyColor.setInheritColor(getSkyColor())
+        getDimensionRenderInfo().environment.fogColor.setInheritColor(getFogColor())
     }
-    while (reloadSky.consumeClick()) {
+    while (RELOAD_SKY.consumeClick()) {
         reloadCelestial()
         if (!hasShownWarning) {
             hasShownWarning = true

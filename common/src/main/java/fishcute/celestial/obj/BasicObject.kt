@@ -1,7 +1,7 @@
 package fishcute.celestial.sky
 
-import ColorEntry
 import com.google.gson.JsonObject
+import fishcute.celestial.ColorEntry
 import fishcute.celestial.VertexPoint
 import fishcute.celestial.convertToPointUvList
 import fishcute.celestial.expressions.Expression

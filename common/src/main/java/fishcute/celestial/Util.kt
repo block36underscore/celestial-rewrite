@@ -11,9 +11,13 @@ import fishcute.celestial.sky.createSkyObjectFromJson
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
+import java.awt.Color
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.util.*
 
+var getRealSkyColor = false
+var getRealFogColor = false
 
 val reader: Gson = Gson()
 fun getFile(path: String): JsonObject? {
@@ -103,3 +107,21 @@ internal fun JsonObject.getOptional(id: String, other: Int) =
 
 internal fun JsonObject.getAsBasicObject() = createSkyObjectFromJson(this)
 
+private const val digits = "0123456789ABCDEF"
+
+fun getDecimal(color: String): Int {
+    var hex = color.uppercase(Locale.getDefault())
+    var i = 0
+    for (element in hex) {
+        val c = element
+        val d: Int = digits.indexOf(c)
+        i = 16 * i + d
+    }
+    return i
+}
+
+fun debugInfo() =
+"""Has custom sky: $dimensionHasCustomSky
+Sky color: ${getDimensionEnvironmentRenderInfo().skyColor}
+Fog color: ${getDimensionEnvironmentRenderInfo().fogColor}
+""".trimMargin()

@@ -6,18 +6,9 @@ import net.minecraft.client.Minecraft
 
 var forceUpdateVariables = false
 
-fun getDimensionRenderInfo(): CelestialRenderInfo? {
-    return try {
-        renderInfoRegistrar.get(Minecraft.getInstance().level!!.dimension().location())
-    } catch (e: Exception) {
-        null
-    }
-}
+fun getDimensionRenderInfo() = renderInfoRegistrar.get(Minecraft.getInstance().level!!.dimension().location())!!
 
-fun getDimensionEnvironmentRenderInfo(): AtmosphereData? {
-    return if (Minecraft.getInstance().level == null) null
-    else renderInfoRegistrar.get(Minecraft.getInstance().level!!.dimension().location())?.environment
-}
+fun getDimensionEnvironmentRenderInfo() = renderInfoRegistrar.get(Minecraft.getInstance().level!!.dimension().location())!!.environment
 
 fun doesDimensionHaveCustomSky(): Boolean {
     return dimensionHasCustomSky && getDimensionRenderInfo() != null
