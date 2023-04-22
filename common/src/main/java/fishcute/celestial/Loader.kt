@@ -5,7 +5,7 @@ package fishcute.celestial
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import fishcute.celestial.obj.ICelestialObject
-import fishcute.celestial.sky.createSkyObjectFromJson
+import fishcute.celestial.obj.createSkyObjectFromJson
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.Component

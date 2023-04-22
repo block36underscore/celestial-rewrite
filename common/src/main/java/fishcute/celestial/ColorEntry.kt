@@ -12,9 +12,21 @@ import org.apache.commons.lang3.tuple.MutablePair
 import java.awt.Color
 
 
-class ColorEntry {
+class ColorEntry (
+    var red: Expression = ONE,
+    var green: Expression = ONE,
+    var blue: Expression = ONE,
+    var isBasicColor: Boolean = false,
+    var colors: ArrayList<MutablePair<Color, Expression>>? = null,
+    var baseColor: Color = Color(255, 255, 255),
+    var cloneColor: String? = null,
+    var inheritColor: Boolean = false,
+    var ignoreSkyEffects: Boolean = false,
+    var storedColor: Color = Color(255, 255, 255),
+    var updateFrequency: Int = 1,
+    var updateTick: Int = 0
+){
 
-    constructor(): this(null, "#ffffff", 1, false, ONE, ONE, ONE)
     constructor(
         colors: ArrayList<MutablePair<Color, Expression>>?,
         baseColor: String,
@@ -23,11 +35,12 @@ class ColorEntry {
         r: Expression,
         g: Expression,
         b: Expression
-    ) {
+    ): this() {
         this.colors = colors
-        if (baseColor == "inherit") inheritColor =
-            true else if (baseColor == "#skyColor" || baseColor == "#fogColor" || baseColor == "#cloudColor" || baseColor == "#twilightColor") cloneColor =
-            baseColor else this.baseColor = decodeColor(baseColor)
+        if (baseColor == "inherit") inheritColor = true
+        else if (baseColor == "#skyColor" || baseColor == "#fogColor" || baseColor == "#cloudColor" || baseColor == "#twilightColor")
+            cloneColor = baseColor
+        else this.baseColor = decodeColor(baseColor)
         this.updateFrequency = updateFrequency
         this.ignoreSkyEffects = ignoreSkyEffects
         red = r
@@ -35,7 +48,7 @@ class ColorEntry {
         blue = b
     }
 
-    constructor(color: Color) {
+    constructor(color: Color): this() {
         storedColor = color
         isBasicColor = true
         inheritColor = false
@@ -50,18 +63,6 @@ class ColorEntry {
         } else updateTick--
     }
 
-    var red:Expression = ONE
-    var green:Expression = ONE
-    var blue:Expression = ONE
-    var isBasicColor = false
-    var colors: ArrayList<MutablePair<Color, Expression>>? = null
-    var baseColor = Color(255, 255, 255)
-    var cloneColor: String? = null
-    var inheritColor = false
-    var ignoreSkyEffects: Boolean
-    var storedColor = Color(255, 255, 255)
-    var updateFrequency = 0
-    var updateTick = 0
     fun setInheritColor(c: Color) {
         if (inheritColor) baseColor = c
     }
@@ -154,6 +155,8 @@ class ColorEntry {
             )
         }
     }
+
+    override fun toString() = "${red()}, ${green()}, ${blue()}"
 }
 
 var shouldGetRealSkyColor = false

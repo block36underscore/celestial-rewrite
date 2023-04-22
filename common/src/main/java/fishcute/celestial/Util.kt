@@ -7,7 +7,6 @@ import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import fishcute.celestial.expressions.Expression
 import fishcute.celestial.expressions.compile
-import fishcute.celestial.sky.createSkyObjectFromJson
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -105,7 +104,7 @@ internal fun JsonObject.getOptional(id: String, other: Int) =
     if (this.has(id)) this[id].asInt
     else other
 
-internal fun JsonObject.getAsBasicObject() = createSkyObjectFromJson(this)
+//internal fun JsonObject.getAsBasicObject() = createSkyObjectFromJson(this) // Potentially not needed
 
 private const val digits = "0123456789ABCDEF"
 

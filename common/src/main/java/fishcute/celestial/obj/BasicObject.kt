@@ -1,4 +1,4 @@
-package fishcute.celestial.sky
+package fishcute.celestial.obj
 
 import com.google.gson.JsonObject
 import com.mojang.math.Vector3f
@@ -9,7 +9,6 @@ import fishcute.celestial.expressions.Expression
 import fishcute.celestial.expressions.ExpressionContext
 import fishcute.celestial.expressions.ZERO
 import fishcute.celestial.getOptional
-import fishcute.celestial.obj.ICelestialObject
 import net.minecraft.resources.ResourceLocation
 
 class BasicObject(
@@ -65,6 +64,8 @@ class BasicObject(
             solidColor.storedColor.blue * color.z()
         )
     }
+
+    override fun texture() = texture
 
     override fun hasNext() = false
 

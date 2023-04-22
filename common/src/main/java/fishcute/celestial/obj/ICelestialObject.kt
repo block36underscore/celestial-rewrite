@@ -2,6 +2,7 @@ package fishcute.celestial.obj
 
 import com.mojang.math.Vector3f
 import fishcute.celestial.VertexPoint
+import net.minecraft.resources.ResourceLocation
 
 interface ICelestialObject {
     fun degX(): Float
@@ -20,8 +21,8 @@ interface ICelestialObject {
     fun vertices(): ArrayList<VertexPoint>
 
     fun colors(): Vector3f
-
     fun solidColors(): Vector3f
+    fun texture(): ResourceLocation
 
     fun hasNext(): Boolean
     fun next()

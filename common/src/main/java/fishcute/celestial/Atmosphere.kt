@@ -13,40 +13,20 @@ fun loadAtmospheres(dimensions: JsonObject) {
 
 class AtmosphereData(
     val hasThickFog: Boolean,
-    fogColor: ColorEntry,
-    skyColor: ColorEntry,
-    cloudHeight: Expression,
-    cloudColor: ColorEntry,
-    fogStart: Expression,
-    fogEnd: Expression,
-    twilightColor: ColorEntry,
-    twilightAlpha: Expression,
-    voidCullingLevel: Expression
-) {
-    val fogColor: ColorEntry
-    val skyColor: ColorEntry
-    val cloudHeight: Expression
-    val cloudColor: ColorEntry
-    val fogStart: Expression
-    val fogEnd: Expression
-    val twilightColor: ColorEntry
-    val twilightAlpha: Expression
+    val fogColor: ColorEntry,
+    val skyColor: ColorEntry,
+    val cloudHeight: Expression,
+    val cloudColor: ColorEntry,
+    val fogStart: Expression,
+    val fogEnd: Expression,
+    val twilightColor: ColorEntry,
+    val twilightAlpha: Expression,
     val voidCullingLevel: Expression
+) {
 
-    init {
-        this.fogColor = fogColor
-        this.skyColor = skyColor
-        this.cloudHeight = cloudHeight
-        this.cloudColor = cloudColor
-        this.fogStart = fogStart
-        this.fogEnd = fogEnd
-        this.twilightColor = twilightColor
-        this.twilightAlpha = twilightAlpha
-        this.voidCullingLevel = voidCullingLevel
-    }
 
     fun useSimpleFog(): Boolean {
-        return fogStart == NEGATIVE_ONE || fogEnd == NEGATIVE_ONE
+        return fogStart() == -1.0 || fogEnd() == -1.0
     }
 
     fun updateColorEntries() {
