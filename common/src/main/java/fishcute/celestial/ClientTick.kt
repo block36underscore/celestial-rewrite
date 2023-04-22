@@ -10,19 +10,16 @@ import net.minecraft.client.Minecraft
 
 
 
-var dimensionHasCustomSky = false
-
 fun tick() {
     if (Minecraft.getInstance().level != null) worldTick()
 }
 
 fun worldTick() {
-    dimensionHasCustomSky = renderInfoRegistrar.map.containsKey(Minecraft.getInstance().level!!.dimension().location())
     updateStars()
     //updateVariableValues() //Probably not needed
     if (doesDimensionHaveCustomSky()) {
-        getDimensionRenderInfo().environment.skyColor.setInheritColor(getSkyColor())
-        getDimensionRenderInfo().environment.fogColor.setInheritColor(getFogColor())
+        getDimensionRenderInfo()!!.environment.skyColor.setInheritColor(getSkyColor())
+        getDimensionRenderInfo()!!.environment.fogColor.setInheritColor(getFogColor())
     }
     while (RELOAD_SKY.consumeClick()) {
         reloadCelestial()

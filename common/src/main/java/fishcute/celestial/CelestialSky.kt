@@ -6,10 +6,13 @@ import net.minecraft.client.Minecraft
 
 var forceUpdateVariables = false
 
-fun getDimensionRenderInfo() = renderInfoRegistrar.get(Minecraft.getInstance().level!!.dimension().location())!!
+fun getDimensionRenderInfo() = Minecraft.getInstance().level?.dimension()?.location()
+    ?.let { renderInfoRegistrar.get(it) }
 
-fun getDimensionEnvironmentRenderInfo() = renderInfoRegistrar.get(Minecraft.getInstance().level!!.dimension().location())!!.environment
+fun getDimensionEnvironmentRenderInfo() = Minecraft.getInstance().level?.dimension()?.location()
+    ?.let { renderInfoRegistrar.get(it) }?.environment
 
 fun doesDimensionHaveCustomSky(): Boolean {
-    return dimensionHasCustomSky && getDimensionRenderInfo() != null
+    return Minecraft.getInstance().level?.dimension()?.location()
+        ?.let { renderInfoRegistrar.get(it) } != null
 }

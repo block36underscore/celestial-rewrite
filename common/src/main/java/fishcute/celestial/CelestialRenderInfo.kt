@@ -1,9 +1,9 @@
 package fishcute.celestial
 
-import fishcute.celestial.obj.CelestialObject
+import fishcute.celestial.obj.ICelestialObject
 
 
-class CelestialRenderInfo(val skyObjects: ArrayList<CelestialObject>, environment: AtmosphereData) {
+class CelestialRenderInfo(val skyObjects: ArrayList<ICelestialObject>, environment: AtmosphereData) {
     val environment: AtmosphereData
 
     init {

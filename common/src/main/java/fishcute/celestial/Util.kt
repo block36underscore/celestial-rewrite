@@ -46,8 +46,8 @@ class VertexPoint(var pointX: String, var pointY: String, var pointZ: String, uv
     }
 }
 
-fun sendMessage(text: String?, actionBar: Boolean) {
-    text?.let { Component.literal(it) }?.let { Minecraft.getInstance().player?.displayClientMessage(it, actionBar) }
+fun sendMessage(text: String, actionBar: Boolean) {
+    Minecraft.getInstance().player?.displayClientMessage(Component.literal(text), actionBar)
 }
 
 fun convertToPointUvList(o: JsonObject, name: String): ArrayList<VertexPoint> {
@@ -120,8 +120,8 @@ fun getDecimal(color: String): Int {
     return i
 }
 
-fun debugInfo() =
-"""Has custom sky: $dimensionHasCustomSky
-Sky color: ${getDimensionEnvironmentRenderInfo().skyColor}
-Fog color: ${getDimensionEnvironmentRenderInfo().fogColor}
+fun debugInfo(): String =
+"""Has custom sky: ${doesDimensionHaveCustomSky()}
+Sky color: ${getDimensionEnvironmentRenderInfo()?.skyColor ?: "null"}
+Fog color: ${getDimensionEnvironmentRenderInfo()?.fogColor ?: "null"}
 """.trimMargin()

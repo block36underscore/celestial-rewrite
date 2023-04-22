@@ -1,6 +1,7 @@
 package fishcute.celestial.sky
 
 import com.google.gson.JsonObject
+import com.mojang.math.Vector3f
 import fishcute.celestial.ColorEntry
 import fishcute.celestial.VertexPoint
 import fishcute.celestial.convertToPointUvList
@@ -8,7 +9,7 @@ import fishcute.celestial.expressions.Expression
 import fishcute.celestial.expressions.ExpressionContext
 import fishcute.celestial.expressions.ZERO
 import fishcute.celestial.getOptional
-import fishcute.celestial.obj.CelestialObject
+import fishcute.celestial.obj.ICelestialObject
 import net.minecraft.resources.ResourceLocation
 
 class BasicObject(
@@ -29,7 +30,45 @@ class BasicObject(
     val celestialObjectProperties: BasicObjectProperties,
     val vertexList: ArrayList<VertexPoint>,
 
-    ): CelestialObject {
+    ): ICelestialObject {
+    override fun degX() = degreesX().toFloat()
+
+    override fun degY() = degreesY().toFloat()
+
+    override fun degZ() = degreesZ().toFloat()
+
+    override fun posX() = posX.invoke().toFloat()
+
+    override fun posY() = posY.invoke().toFloat()
+
+    override fun posZ() = posZ.invoke().toFloat()
+
+    override fun alpha() = celestialObjectProperties.alpha().toFloat()
+    override fun distance() = distance.invoke().toFloat()
+    override fun scale() = scale.invoke().toFloat()
+
+    override fun moonPhase() = celestialObjectProperties.moonPhase().toInt()
+
+    override fun vertices() = vertexList
+
+    override fun colors() = Vector3f(
+        celestialObjectProperties.red().toFloat(),
+        celestialObjectProperties.green().toFloat(),
+        celestialObjectProperties.blue().toFloat()
+    )
+
+    override fun solidColors(): Vector3f {
+        val color = colors()
+        return Vector3f(
+            solidColor.storedColor.red * color.x(),
+            solidColor.storedColor.green * color.y(),
+            solidColor.storedColor.blue * color.z()
+        )
+    }
+
+    override fun hasNext() = false
+
+    override fun next() {}
 
 }
 

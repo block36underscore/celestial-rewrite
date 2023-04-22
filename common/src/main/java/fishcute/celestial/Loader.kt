@@ -4,7 +4,7 @@ package fishcute.celestial
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import fishcute.celestial.obj.CelestialObject
+import fishcute.celestial.obj.ICelestialObject
 import fishcute.celestial.sky.createSkyObjectFromJson
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
@@ -37,7 +37,7 @@ private fun loadResources() {
 
     for (dimension in getAsStringList(dimensionList)!!) {
         log("Loading sky for dimension \"$dimension\"")
-        val celestialObjects  = ArrayList<CelestialObject>()
+        val celestialObjects  = ArrayList<ICelestialObject>()
         for (i in getAllCelestialObjects(dimension)) {
             log("[$dimension] Loading celestial object \"$i\"")
             val obj = getFile("celestial:sky/$dimension/objects/$i.json")!!

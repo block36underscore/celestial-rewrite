@@ -1,6 +1,8 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
+    id 'org.jetbrains.kotlin.jvm'
 }
+
 architectury {
     platformSetupLoomIde()
     forge()
@@ -21,6 +23,7 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+    common("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 }
 
 processResources {
