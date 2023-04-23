@@ -65,6 +65,13 @@ class BasicObject(
         )
     }
 
+    override fun render() {
+        TODO("Not yet implemented")
+    }
+
+    override fun renderAll() {
+        this.render()
+    }
     override fun texture() = texture
 
     override fun hasNext() = false

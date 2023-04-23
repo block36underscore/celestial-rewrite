@@ -27,4 +27,8 @@ interface ICelestialObject {
     fun hasNext(): Boolean
     fun next()
 
+    fun render()
+
+    fun renderAll()
+
 }
