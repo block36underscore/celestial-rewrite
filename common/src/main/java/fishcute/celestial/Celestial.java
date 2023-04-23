@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.InputConstants;
 import dev.architectury.event.events.client.ClientTickEvent;
 import dev.architectury.registry.client.keymappings.KeyMappingRegistry;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.network.chat.Component;
 
 public class Celestial {
     public static final KeyMapping RELOAD_SKY = new KeyMapping("key.reload_sky",
@@ -24,7 +23,7 @@ public class Celestial {
 
         ClientTickEvent.CLIENT_POST.register(minecraft -> {
             while (RELOAD_SKY.consumeClick()) {
-                if (minecraft.player != null) minecraft.player.displayClientMessage(Component.literal("click"), true);
+                Loader.reloadCelestial();
             }
             while (DEBUG_INFO.consumeClick()) {
                 Util.sendMessage(Util.debugInfo(), false);
