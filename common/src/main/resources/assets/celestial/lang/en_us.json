@@ -1,3 +1,4 @@
 {
-  "key.reload_sky" : "Reload Celestial Sky"
+  "key.celestial.reload_sky": "Reload Celestial Sky",
+  "key.celestial.debug_sky": "Print Debug Information"
 }

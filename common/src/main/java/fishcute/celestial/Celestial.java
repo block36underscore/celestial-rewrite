@@ -6,11 +6,11 @@ import dev.architectury.registry.client.keymappings.KeyMappingRegistry;
 import net.minecraft.client.KeyMapping;
 
 public class Celestial {
-    public static final KeyMapping RELOAD_SKY = new KeyMapping("key.reload_sky",
+    public static final KeyMapping RELOAD_SKY = new KeyMapping("key.celestial.reload_sky",
             InputConstants.KEY_F10,
             "key.categories.misc");
 
-    public static final KeyMapping DEBUG_INFO = new KeyMapping("key.debug_sky",
+    public static final KeyMapping DEBUG_INFO = new KeyMapping("key.celestial.debug_sky",
             InputConstants.KEY_F9,
             "key.categories.misc");
 
