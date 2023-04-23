@@ -7,6 +7,7 @@
   ],
   "client": [
     "BiomeMixin",
+    "ClientLevelMixin",
     "DimensionSpecialEffectsMixin",
     "FogRendererMixin",
     "ReloadableResourceManagerMixin"
