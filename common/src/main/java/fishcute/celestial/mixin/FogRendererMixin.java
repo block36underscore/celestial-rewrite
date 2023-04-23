@@ -18,7 +18,6 @@ public class FogRendererMixin {
     private static boolean setupFog(boolean thickFog) {
         if (CelestialSky.doesDimensionHaveCustomSky() && CelestialSky.getDimensionRenderInfo().getEnvironment().useSimpleFog())
             return CelestialSky.getDimensionRenderInfo().getEnvironment().getHasThickFog();
-        System.out.println("a");
         return thickFog;
     }
     @Inject(method = "setupFog", at = @At("RETURN"))
@@ -27,7 +26,6 @@ public class FogRendererMixin {
             AtmosphereData data = CelestialSky.getDimensionRenderInfo().getEnvironment();
             RenderSystem.setShaderFogStart(data.getFogStart().invoke().floatValue());
             RenderSystem.setShaderFogEnd(data.getFogEnd().invoke().floatValue());
-            System.out.println("b");
         }
     }
 
@@ -48,7 +46,6 @@ public class FogRendererMixin {
             fogGreen = CelestialSky.getDimensionRenderInfo().getEnvironment().getFogColor().getStoredColor().getGreen() / 255.0F;
             fogBlue = CelestialSky.getDimensionRenderInfo().getEnvironment().getFogColor().getStoredColor().getBlue() / 255.0F;
             RenderSystem.clearColor(fogRed, fogGreen, fogBlue, 0);
-            System.out.println("c");
         }
     }
 }
